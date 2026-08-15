@@ -1,0 +1,18 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "tailwindcss";
+
+@theme {
+  --color-lakers-purple: #552583;
+  --color-lakers-purple-dark: #3b185f;
+  --color-lakers-purple-light: #6b30a4;
+  --color-lakers-gold: #fdb927;
+  --color-lakers-gold-hover: #e0a01e;
+  --color-lakers-black: #000000;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f1f5f9;
+  min-height: 100vh;
+}
