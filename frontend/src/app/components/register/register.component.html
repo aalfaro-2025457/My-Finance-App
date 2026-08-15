@@ -1,0 +1,65 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-lakers-purple-dark via-lakers-purple to-slate-900 p-4">
+  <mat-card class="w-full max-w-lg p-6 bg-white shadow-2xl rounded-2xl border-t-4 border-lakers-gold">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-extrabold text-lakers-purple tracking-wide">Create Account</h1>
+      <p class="text-slate-500 text-sm mt-1">Join to track your expenses</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-3">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="email@example.com" />
+        <mat-icon matSuffix class="text-lakers-purple">email</mat-icon>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName" placeholder="John Doe" />
+        <mat-icon matSuffix class="text-lakers-purple">person</mat-icon>
+        <mat-error *ngIf="registerForm.get('fullName')?.hasError('required')">Full name is required</mat-error>
+      </mat-form-field>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="phone" placeholder="12345678" />
+          <mat-icon matSuffix class="text-lakers-purple">phone</mat-icon>
+          <mat-error *ngIf="registerForm.get('phone')?.hasError('required')">Phone is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Age</mat-label>
+          <input matInput formControlName="age" type="number" placeholder="18" />
+          <mat-icon matSuffix class="text-lakers-purple">cake</mat-icon>
+          <mat-error *ngIf="registerForm.get('age')?.hasError('required')">Age is required</mat-error>
+          <mat-error *ngIf="registerForm.get('age')?.hasError('min')">Must be at least 18</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon class="text-lakers-purple">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">Min 6 characters required</mat-error>
+      </mat-form-field>
+
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid || isLoading"
+        class="w-full py-3 bg-lakers-purple hover:bg-lakers-purple-dark text-lakers-gold font-bold rounded-lg shadow-md transition duration-200 disabled:opacity-50 mt-2"
+      >
+        {{ isLoading ? 'Creating Account...' : 'Register' }}
+      </button>
+    </form>
+
+    <div class="text-center mt-6 text-sm text-slate-600">
+      Already have an account?
+      <a routerLink="/login" class="text-lakers-purple font-bold hover:underline">Sign In here</a>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,40 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-lakers-purple-dark via-lakers-purple to-slate-900 p-4">
+  <mat-card class="w-full max-w-md p-6 bg-white shadow-2xl rounded-2xl border-t-4 border-lakers-gold">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-extrabold text-lakers-purple tracking-wide">Finance App</h1>
+      <p class="text-slate-500 text-sm mt-1">Sign in to manage your budget</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="email@example.com" />
+        <mat-icon matSuffix class="text-lakers-purple">email</mat-icon>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon class="text-lakers-purple">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid || isLoading"
+        class="w-full py-3 bg-lakers-purple hover:bg-lakers-purple-dark text-lakers-gold font-bold rounded-lg shadow-md transition duration-200 disabled:opacity-50"
+      >
+        {{ isLoading ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+
+    <div class="text-center mt-6 text-sm text-slate-600">
+      Don't have an account?
+      <a routerLink="/register" class="text-lakers-purple font-bold hover:underline">Register here</a>
+    </div>
+  </mat-card>
+</div>
